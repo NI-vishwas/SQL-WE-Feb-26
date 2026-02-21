@@ -1,0 +1,11 @@
+-- 4
+-- DDL, DML, DCL, DQL
+-- Create a Database
+CREATE DATABASE demo1;
+-- Use the database
+USE demo;
+-- Create a Table
+CREATE TABLE demo.employees(emp_id INT, emp_name VARCHAR(50));
+
+-- to create a table caleed as friends_list with id, name, email
+CREATE TABLE demo.friends_list(id INT, name VARCHAR(50), email VARCHAR(50));
