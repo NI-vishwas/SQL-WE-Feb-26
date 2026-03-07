@@ -19,3 +19,6 @@
 - [Insert Statements](https://dev.mysql.com/doc/refman/8.4/en/insert.html)
 - [Update Statement](https://dev.mysql.com/doc/refman/8.4/en/update.html)
 - [Delete Statement](https://dev.mysql.com/doc/refman/8.4/en/delete.html)
+
+## User Accounts and Privileges
+- [User Accounts and Privileges](https://dev.mysql.com/doc/refman/8.4/en/access-control.html)
