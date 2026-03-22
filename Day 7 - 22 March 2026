@@ -1,0 +1,38 @@
+SELECT ProductId FROM Orders;
+SELECT ProductName FROM Products WHERE EXISTS (SELECT DISTINCT ProductID FROM OrderDetails);
+-- get the products whose unit price is greater than unit price of products in category 2
+SELECT * FROM Products WHERE Price > ANY(SELECT Price FROM Products WHERE CategoryId = 2);
+
+SELECT * FROM Products WHERE Price > ALL(SELECT Price FROM Products WHERE CategoryId = 2);
+SELECT * FROM Products WHERE Price > (SELECT MAX(Price) FROM Products WHERE CategoryId = 2);
+
+SELECT * FROM Products CROSS JOIN Customers;
+
+-- Top 2 most expensive product in each category
+SELECT * FROM Products 
+ORDER BY Price DESC 
+LIMIT 2;
+
+SELECT * FROM Products
+WHERE CategoryId = 1
+ORDER BY Price DESC 
+LIMIT 2;
+
+SELECT ProductID, ProductName, Price, CategoryID FROM Products ORDER BY CategoryID, Price DESC;
+
+SELECT ProductID, ProductName, Price, CategoryID ,
+RANK() OVER (PARTITION BY CategoryID ORDER BY CategoryID, Price DESC) AS 'rnk' FROM Products;
+
+-- Fourth most expensive product in each category
+WITH ranked AS(
+SELECT ProductID, ProductName, Price, CategoryID ,
+RANK() OVER (PARTITION BY CategoryID ORDER BY CategoryID, Price DESC) AS 'rnk' FROM Products
+)
+SELECT categoryID,ProductName, productID, Price FROM ranked WHERE rnk = 4;
+
+
+SELECT ProductID, ProductName, Price, CategoryID ,
+RANK() OVER (PARTITION BY CategoryID ORDER BY CategoryID, Price DESC) AS 'rnk' FROM Products;
+
+SELECT ProductID, ProductName, Price, CategoryID ,
+DENSE_RANK() OVER (PARTITION BY CategoryID ORDER BY CategoryID, Price DESC) AS 'rnk' FROM Products;
